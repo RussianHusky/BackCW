@@ -1,0 +1,35 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run and Build App" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="backcw-app" />
+        <option name="containerName" value="backcw" />
+        <option name="contextFolderPath" value="." />
+        <option name="envVars">
+          <list>
+            <DockerEnvVarImpl>
+              <option name="name" value="ASPNETCORE_URLS" />
+              <option name="value" value="http://0.0.0.0:80" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="DbConnectionString" />
+              <option name="value" value="User ID=postgres;Password=coolpassword;Host=postgres;Pooling=true;" />
+            </DockerEnvVarImpl>
+          </list>
+        </option>
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="80" />
+              <option name="hostPort" value="80" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="--network backcw" />
+        <option name="sourceFilePath" value="BackCW/Dockerfile" />
+      </settings>
+    </deployment>
+    <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isPublishEnabled="true" />
+    <method v="2" />
+  </configuration>
+</component>

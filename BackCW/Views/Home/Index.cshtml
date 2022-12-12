@@ -1,0 +1,49 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @if (!@Model.CountEnd)
+    {
+        <p>@Model.Countdown</p>
+    }
+    else
+    {
+        if (@Model.User == null)
+        {
+            <p>It is Christmas, to get your partner, please sign in</p>
+        }
+        else
+        {
+            if (@Model.User.Partner == null && @Model.CountEnd)
+            {
+                <p>It is Christmas, press the button below to get your partner</p>
+            }
+        }
+    }
+    @if (Model.User != null)
+    {
+        @if (@Model.User.Partner == null && !@Model.CountEnd)
+        {
+            <p>It is not Christmas yet, please wait</p>
+        }
+        else if (@Model.User.Partner == null && @Model.CountEnd)
+        {
+            <form method="post" asp-controller="Home" asp-action="GeneratePartner">
+                <button type="submit" class="btn btn-primary">Generate Partner</button>
+            </form>
+        }
+        else
+        {
+            <p>Your partner is @Model.User.Partner.Name and they like @Model.User.Partner.Likes</p>
+        }
+    }
+    else
+    {
+        <form method="post" asp-controller="Home" asp-action="SignIn">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+    }
+</div>
